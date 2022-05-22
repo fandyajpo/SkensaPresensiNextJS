@@ -60,7 +60,7 @@ const SideNav = ({ children }) => {
         >
           <div className='w-full h-16 flex justify-start items-center'>
             <div className='w-20 h-16 p-4'>
-              <div className='w-full h-full relative flex items-center rounded-full'>
+              <div className='w-full h-full relative flex items-center rounded-full '>
                 <button
                   onClick={() => globalAct.setSideBar(!globalCtx.sideBar)}
                   className={`duration-500 ${
@@ -103,66 +103,23 @@ const SideNav = ({ children }) => {
             }`}
           >
             <div className='flex flex-col gap-y-2 w-full'>
-              <div className='bg-white w-full p-2 rounded-md flex items-center gap-x-2 border-l-4  border-gray-500 shadow-md'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5 text-blue-500'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                <p>Bantuan</p>
-              </div>
-              <div className='bg-white w-full p-2 rounded-md flex items-center gap-x-2 border-l-4  border-gray-500 shadow-md'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5 text-blue-500'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                <p>Ini untuk apa</p>
-              </div>
-              <div className='bg-white w-full p-2 rounded-md flex items-center gap-x-2 border-l-4  border-gray-500 shadow-md'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5 text-blue-500'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                <p>Ini untuk apa</p>
-              </div>
-              <div className='bg-white w-full p-2 rounded-md flex items-center gap-x-2 border-l-4  border-gray-500 shadow-md'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  className='h-5 w-5 text-blue-500'
-                  viewBox='0 0 20 20'
-                  fill='currentColor'
-                >
-                  <path
-                    fillRule='evenodd'
-                    d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
-                    clipRule='evenodd'
-                  />
-                </svg>
-                <p>Ini untuk apa</p>
-              </div>
+              <Link href={"/home/bantuan"} passHref>
+                <div className='bg-white w-full p-2 rounded-md flex items-center gap-x-2 border-l-4  border-gray-500 shadow-md'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    className='h-5 w-5 text-blue-500'
+                    viewBox='0 0 20 20'
+                    fill='currentColor'
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
+                  <p>Bantuan</p>
+                </div>
+              </Link>
             </div>
             <div className='flex flex-col gap-y-2 w-full'>
               <div className='bg-red-500/50 w-full p-2 rounded-md flex items-center gap-x-2 border-l-4  border-red-500 shadow-md'>
@@ -206,7 +163,7 @@ const SideNav = ({ children }) => {
           }`}
         >
           <div
-            className={`w-full h-16 duration-500 fixed top-0 backdrop-blur-sm flex items-center justify-center px-4 ${
+            className={`w-full h-16 duration-500 fixed top-0 backdrop-blur-sm flex items-center justify-center px-4${
               scrolling ? "bg-white/50" : "bg-white"
             }`}
           >
@@ -221,7 +178,9 @@ const SideNav = ({ children }) => {
           </div>
           {useMemo(() => {
             return (
-              <div className='bg-white backdrop-blur-sm h-20 fixed bottom-0 w-full flex-row flex justify-around'>
+              <div
+                className={`bg-white h-20 fixed bottom-0 w-full flex-row flex justify-around rounded-t-3xl`}
+              >
                 <Link href={"/home"} passHref>
                   <div
                     className={`duration-150 ease-in flex items-center justify-center flex-col ${

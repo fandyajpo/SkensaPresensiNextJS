@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 const Camera = () => {
   const router = useRouter();
   return (
@@ -26,9 +26,11 @@ const Camera = () => {
       </div>
       <div className='w-full h-full bg-black'></div>
       <div className='bg-white/30 w-full h-24 fixed bottom-0 flex items-center justify-center shadow-md'>
-        <div className='border border-white p-1 w-fit rounded-full'>
-          <div className='bg-white rounded-full w-14 h-14 ' />
-        </div>
+        <Link href={"camera/detail"} passHref>
+          <div className='border border-white p-1 w-fit rounded-full'>
+            <div className='bg-white rounded-full w-14 h-14 ' />
+          </div>
+        </Link>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ import RecentActivity from "components/card/RecentActivity";
 
 const Home = () => {
   return (
-    <div className='w-full h-full flex flex-col gap-y-2'>
+    <div className='w-full h-full flex flex-col gap-y-2 bg-blue-300'>
       <Profile />
       <div>
         <div className='px-2 pb-2'>
