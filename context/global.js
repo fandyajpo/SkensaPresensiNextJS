@@ -9,11 +9,9 @@ export const GlobalProvider = ({ children }) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [sideBar, setSideBar] = useState(false);
   const [fullname, setFullname] = useState("Faouzia");
-  const [navbar, setNavbar] = useState(true);
 
   const contextValue = {
     globalCtx: {
-      navbar,
       alert,
       modal,
       sideBar,
@@ -22,7 +20,6 @@ export const GlobalProvider = ({ children }) => {
       fullname,
     },
     globalAct: {
-      setNavbar,
       setAlert,
       setModal,
       setSideBar,
