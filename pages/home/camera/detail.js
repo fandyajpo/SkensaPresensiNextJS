@@ -1,6 +1,22 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Photo } from "./index";
 const Detail = () => {
+  const takePhoto = () => {
+    const width = 414;
+    const height = width / (16 / 9);
+
+    let video = videoRef.current;
+    let photo = photoRef.current;
+
+    photo.width = width;
+    photo.height = height;
+
+    let ctx = photo.getContext("2d");
+    ctx.drawImage(video, 0, 0, width, height);
+    globalAct.setPresentPhoto(true);
+  };
+
   const router = useRouter();
   return (
     <div className='w-full h-screen overflow-hidden'>
@@ -25,7 +41,9 @@ const Detail = () => {
         <p className='text-sm font-bold'>Back</p>
       </div>
       <div className='w-full h-full bg-sidebar p-4 flex flex-col items-center gap-y-2'>
-        <div className='bg-blue-500 w-full h-96 rounded-md shadow-md' />
+        <div className={`w-full h-full absolute `}>
+          <canvas ref={Photo} className={`w-full h-auto`}></canvas>
+        </div>
         <div className='w-full'>
           <div className='bg-white w-full h-24 rounded-md p-2 shadow-md space-y-2'>
             <p className='text-sm font-bold text-green-500'>Presensi Datang</p>

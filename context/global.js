@@ -5,14 +5,16 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
   const [isFetch, setIsFetch] = useState(false);
   const [modal, setModal] = useState("");
-  const [alert, setAlert] = useState("");
+
+  const [presentPhoto, setPresentPhoto] = useState(false);
+
   const [errorMsg, setErrorMsg] = useState("");
   const [sideBar, setSideBar] = useState(false);
   const [fullname, setFullname] = useState("Faouzia");
 
   const contextValue = {
     globalCtx: {
-      alert,
+      presentPhoto,
       modal,
       sideBar,
       errorMsg,
@@ -20,7 +22,7 @@ export const GlobalProvider = ({ children }) => {
       fullname,
     },
     globalAct: {
-      setAlert,
+      setPresentPhoto,
       setModal,
       setSideBar,
       setErrorMsg,
