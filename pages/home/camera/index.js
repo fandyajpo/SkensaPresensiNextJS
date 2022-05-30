@@ -43,8 +43,8 @@ const Cam = () => {
   }, [videoRef]);
   return (
     <div className='w-full h-screen object-fill'>
-      <div className='bg-white w-full h-24 flex items-center px-4 gap-x-2 overflow-hidden absolute top-0'>
-        <div
+      <div className='bg-white w-full h-24 flex items-center px-4 gap-x-2 overflow-hidden absolute top-0 z-50'>
+        <button
           onClick={() => router.back()}
           className='w-10 h-10 bg-sidebar flex items-center justify-center rounded-xl shadow-md'
         >
@@ -60,7 +60,7 @@ const Cam = () => {
               clipRule='evenodd'
             />
           </svg>
-        </div>
+        </button>
         <p className='text-sm font-bold'>Back</p>
       </div>
       <div className={`w-full h-full  ${hasPhoto ? "" : "hidden"} px-4 pt-24`}>
@@ -94,12 +94,14 @@ const Cam = () => {
       </div>
       <div className='bg-white w-full fixed bottom-0 flex items-center justify-center shadow-md'>
         <div className='py-3.5'>
-          <button
-            onClick={takePhoto}
-            className='border border-blue-500 p-1 w-fit rounded-full'
-          >
-            <div className='bg-blue-500 rounded-full w-14 h-14 ' />
-          </button>
+          <Link href={"camera/detail"}>
+            <button
+              // onClick={takePhoto}
+              className='border border-blue-500 p-1 w-fit rounded-full'
+            >
+              <div className='bg-blue-500 rounded-full w-14 h-14 ' />
+            </button>
+          </Link>
         </div>
       </div>
     </div>

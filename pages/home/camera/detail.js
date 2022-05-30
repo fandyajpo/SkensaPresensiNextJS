@@ -1,23 +1,44 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Photo } from "./index";
+
+import fetchJson, { FetchError } from "lib/fetchJson";
+
+import { GlobalContext } from "context/global";
+import { useContext } from "react";
+
 const Detail = () => {
-  const takePhoto = () => {
-    const width = 414;
-    const height = width / (16 / 9);
-
-    let video = videoRef.current;
-    let photo = photoRef.current;
-
-    photo.width = width;
-    photo.height = height;
-
-    let ctx = photo.getContext("2d");
-    ctx.drawImage(video, 0, 0, width, height);
-    globalAct.setPresentPhoto(true);
-  };
-
+  const { globalCtx, globalAct } = useContext(GlobalContext);
   const router = useRouter();
+
+  async function HandleSubmit(e) {
+    e.preventDefault();
+    globalAct.setIsFetch(true);
+
+    const body = {
+      absen_type: "masuk",
+      username: "fandy",
+      uri: "absen",
+    };
+
+    try {
+      await fetchJson("http://127.0.0.1:9022/absen", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      router.replace("/home");
+    } catch (error) {
+      if (error instanceof FetchError) {
+        globalAct.setErrorMsg(error.data.message);
+      } else {
+        globalAct.setErrorMsg("An unexpected error happened");
+      }
+      alert("something went wrong", error);
+    }
+
+    globalAct.setIsFetch(false);
+  }
+
   return (
     <div className='w-full h-screen overflow-hidden'>
       <div className='bg-white h-16 flex items-center px-4 gap-x-2'>
@@ -41,8 +62,8 @@ const Detail = () => {
         <p className='text-sm font-bold'>Back</p>
       </div>
       <div className='w-full h-full bg-sidebar p-4 flex flex-col items-center gap-y-2'>
-        <div className={`w-full h-full absolute `}>
-          <canvas ref={Photo} className={`w-full h-auto`}></canvas>
+        <div className={`w-full h-2/4 `}>
+          <div className='bg-black w-full h-full rounded-lg' />
         </div>
         <div className='w-full'>
           <div className='bg-white w-full h-24 rounded-md p-2 shadow-md space-y-2'>
@@ -60,20 +81,52 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      <div className='bg-white w-full h-24 fixed bottom-0 flex items-center justify-center shadow-md px-4 gap-x-2'>
+      <div className='bg-white w-full h-24 fixed bottom-0 flex items-center justify-center shadow-md px-4 gap-x-2 rounded-t-3xl'>
         <Link href={"/home/camera"} passHref>
-          <div className='bg-blue-500 w-full h-10 rounded-full flex items-center justify-center'>
+          <div className='bg-blue-500 w-4/12 h-10 rounded-full flex items-center justify-center'>
             <p className='text-sm font-bold text-white'>Kembali</p>
           </div>
         </Link>
-        <Link href={"/home"} passHref>
+        <button onClick={HandleSubmit} className='w-full'>
           <div className='bg-green-500 w-full h-10 rounded-full flex items-center justify-center'>
             <p className='font-bold text-sm text-white'>Simpan</p>
           </div>
-        </Link>
+        </button>
       </div>
     </div>
   );
 };
 
 export default Detail;
+
+// <FormAbsen
+// globalCtx={globalCtx}
+// globalAct={globalAct}
+// onSubmit={async function handleSubmit(e) {
+//   e.preventDefault();
+//   globalAct.setIsFetch(true);
+
+//   const body = {
+//     username: e.currentTarget.username.value,
+//     password: e.currentTarget.password.value,
+//     uri: "",
+//   };
+
+//   try {
+//     await fetchJson("/api/post", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(body),
+//     });
+//     router.replace("/dashboard");
+//   } catch (error) {
+//     if (error instanceof FetchError) {
+//       globalAct.setErrorMsg(error.data.message);
+//     } else {
+//       globalAct.setErrorMsg("An unexpected error happened");
+//     }
+//   }
+
+//   globalAct.setIsFetch(false);
+// }}
+// />
